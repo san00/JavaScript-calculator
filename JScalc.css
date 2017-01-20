@@ -1,0 +1,31 @@
+#parent{
+  display: flex;
+  border: 2px solid green;
+  justify-content: center;
+  padding-top: 10em;
+  padding-bottom: 4em;
+  background: grey;
+}
+
+.flexcontainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+    width: 400px;
+    height: 450px;
+    border: 1px solid red;
+}
+
+.calcbuttons {
+    width: 80px;
+    height: 60px;
+    border: 1px solid black;
+    flex: 0 1 auto;
+}
+
+#display {
+    flex-basis: 100%;
+    text-align: right;
+}
