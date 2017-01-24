@@ -1,47 +1,57 @@
-// $("#display").text("0");
+$(document).ready(function(){
 
-$("#clear").click(function() {
-    $("#display").empty().text('0');
-});
+//number stores any numbers clicked
+var number = "";
+//newnumber will store  first inputted number
+var newnumber = "";
+//operator will be set to any math operator clicked
+var operator = "";
+var displaydiv = $("#display");
+displaydiv.text("0");
 
 //function to display numbers
 // append allows for numbers to be added to display
-function numbers() {
-    $("#zero").click(function() {
-        $("#display").append("0");
-    });
+$("#numbers a").not("#clear").click(function() {
+    number += $(this).text();
+    displaydiv.text(number);
+    // testNumlength(number); this relates to a function that should check the length of input so it doesn't go outside the display but it's not implemented yet
+});
 
-    $("#one").click(function() {
-        $("#display").append("1");
-    });
-    //
-    $("#two").click(function() {
-        $("#display").append("2");
-    });
-    $('#three').click(function() {
-        $("#display").append("3");
-    });
+// function to allow use of arithmatic operators
 
-    $('#four').click(function() {
-        $("#display").append("4");
-    });
+$("#operators a").not("#equals").click(function() {
+    operator = $(this).text();
+    newnumber = number;
+    number = "";
+    displaydiv.text("0");
+});
 
-    $('#five').click(function() {
-        $("#display").append("5");
-    });
+//function to clear input
 
-    $('#six').click(function() {
-        $("#display").append("6");
-    });
-    $('#seven').click(function() {
-        $("#display").append("7");
-    });
-    $('#eight').click(function() {
-        $("#display").append("8");
-    });
-    $('#nine').click(function() {
-        $("#display").append("9");
-    });
-}
-//separate display function to append numbers to display
-$("#display").append(numbers);
+$("#clear").click(function() {
+    number = "";
+    displaydiv.text("0");
+			newnumber = "";
+    // newnumber = "";
+})
+
+//function to output sum to display
+$("#equals").click(function() {
+    if (operator === "+") {
+        number = (parseInt(newnumber, 10) + parseInt(number, 10)).toString(10);
+
+    } else if (operator === "-") {
+        number = (parseInt(newnumber, 10) - parseInt(number, 10)).toString(10);
+
+    } else if (operator === "/") {
+        number = (parseInt(newnumber, 10) / parseInt(number, 10)).toString(10);
+
+    } else if (operator === "*") {
+        number = (parseInt(newnumber, 10) * parseInt(number, 10)).toString(10);
+    }
+    displaydiv.text(number);
+    newnumber = " ";
+    number = " ";
+});
+
+});
