@@ -1,57 +1,89 @@
-$(document).ready(function(){
+$(document).ready(function() {
 
-//number stores any numbers clicked
-var number = "";
-//newnumber will store  first inputted number
-var newnumber = "";
-//operator will be set to any math operator clicked
-var operator = "";
-var displaydiv = $("#display");
-displaydiv.text("0");
+    //currentNumber stores any numbers clicked
+    var currentNumber = "";
+    //storedNumber will store the previously clicked number,
+    //if set to zero it will parse a number later on in the operator function(see below)
+    var storedNumber = 0;
+    //operator will be set to any math operator clicked
+    var operator = "";
 
-//function to display numbers
-// append allows for numbers to be added to display
-$("#numbers a").not("#clear").click(function() {
-    number += $(this).text();
-    displaydiv.text(number);
-    // testNumlength(number); this relates to a function that should check the length of input so it doesn't go outside the display but it's not implemented yet
-});
+    $("#display").text("0");
 
-// function to allow use of arithmatic operators
+    //function to display numbers
+    $("#numbers a").not("#clear").click(function() {
+        console.log("#numbers", {
+            operator,
+            storedNumber,
+            currentNumber
+        });
+        currentNumber += $(this).text();
+        $("#display").text(currentNumber);
+        
+    });
 
-$("#operators a").not("#equals").click(function() {
-    operator = $(this).text();
-    newnumber = number;
-    number = "";
-    displaydiv.text("0");
-});
+    // function to allow use of arithmatic operators
+    $("#operators a").not("#equals").click(function() {
 
-//function to clear input
+        console.log("#operators", {
+            operator,
+            storedNumber,
+            currentNumber
+        });
+        operator = $(this).text();
+        if (operator === "+") {
+            storedNumber = storedNumber + parseInt(currentNumber, 10);
 
-$("#clear").click(function() {
-    number = "";
-    displaydiv.text("0");
-			newnumber = "";
-    // newnumber = "";
-})
+        } else if (operator === "-") {
+            storedNumber = parseInt(currentNumber, 10) - storedNumber;
 
-//function to output sum to display
-$("#equals").click(function() {
-    if (operator === "+") {
-        number = (parseInt(newnumber, 10) + parseInt(number, 10)).toString(10);
+        } else if (operator === "/") {
+            storedNumber = storedNumber / parseInt(currentNumber, 10);
 
-    } else if (operator === "-") {
-        number = (parseInt(newnumber, 10) - parseInt(number, 10)).toString(10);
+        } else if (operator === "*") {
+            storedNumber = storedNumber * parseInt(currentNumber, 10);
+        }
+        //parse the string being added to storedNumber to convert to number
+        storedNumber = parseInt(currentNumber, 10);
+        currentNumber = "";
+        $("#display").text("0");
 
-    } else if (operator === "/") {
-        number = (parseInt(newnumber, 10) / parseInt(number, 10)).toString(10);
+    });
 
-    } else if (operator === "*") {
-        number = (parseInt(newnumber, 10) * parseInt(number, 10)).toString(10);
-    }
-    displaydiv.text(number);
-    newnumber = " ";
-    number = " ";
-});
+    //function to clear input
+    $("#clear").click(function() {
+        console.log("#clear", {
+            operator,
+            storedNumber,
+            currentNumber
+        });
+        currentNumber = "";
+        $("#display").text("0");
+        storedNumber = 0;
+    })
+
+    //function to output equals sum to display
+    $("#equals").click(function() {
+        //console.log with an object allows all variables to be outputted if they are used(ES6). Not specific to console.log
+        console.log("#equals", {
+            operator,
+            storedNumber,
+            currentNumber
+        });
+        if (operator === "+") {
+            currentNumber = storedNumber + parseInt(currentNumber, 10);
+
+        } else if (operator === "-") {
+            currentNumber = storedNumber - parseInt(currentNumber, 10);
+
+        } else if (operator === "/") {
+            currentNumber = storedNumber / parseInt(currentNumber, 10);
+
+        } else if (operator === "*") {
+            currentNumber = storedNumber * parseInt(currentNumber, 10);
+        }
+        $("#display").text(currentNumber);
+        storedNumber = 0;
+    });
 
 });
