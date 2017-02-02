@@ -19,7 +19,6 @@ $(document).ready(function() {
         });
         currentNumber += $(this).text();
         $("#display").text(currentNumber);
-        
     });
 
     // function to allow use of arithmatic operators
@@ -32,19 +31,19 @@ $(document).ready(function() {
         });
         operator = $(this).text();
         if (operator === "+") {
-            storedNumber = storedNumber + parseInt(currentNumber, 10);
+            storedNumber = storedNumber + parseFloat(currentNumber, 10);
 
         } else if (operator === "-") {
-            storedNumber = parseInt(currentNumber, 10) - storedNumber;
+            storedNumber = parseFloat(currentNumber, 10) - storedNumber;
 
         } else if (operator === "/") {
-            storedNumber = storedNumber / parseInt(currentNumber, 10);
-
+            storedNumber = storedNumber / parseFloat(currentNumber, 10);
+            
         } else if (operator === "*") {
-            storedNumber = storedNumber * parseInt(currentNumber, 10);
+            storedNumber = storedNumber * parseFloat(currentNumber, 10);
         }
         //parse the string being added to storedNumber to convert to number
-        storedNumber = parseInt(currentNumber, 10);
+        storedNumber = parseFloat(currentNumber, 10);
         currentNumber = "";
         $("#display").text("0");
 
@@ -71,16 +70,16 @@ $(document).ready(function() {
             currentNumber
         });
         if (operator === "+") {
-            currentNumber = storedNumber + parseInt(currentNumber, 10);
+            currentNumber = storedNumber + parseFloat(currentNumber, 10);
 
         } else if (operator === "-") {
-            currentNumber = storedNumber - parseInt(currentNumber, 10);
+            currentNumber = storedNumber - parseFloat(currentNumber, 10);
 
         } else if (operator === "/") {
-            currentNumber = storedNumber / parseInt(currentNumber, 10);
+            currentNumber = storedNumber / parseFloat(currentNumber, 10);
 
         } else if (operator === "*") {
-            currentNumber = storedNumber * parseInt(currentNumber, 10);
+            currentNumber = storedNumber * parseFloat(currentNumber, 10);
         }
         $("#display").text(currentNumber);
         storedNumber = 0;
