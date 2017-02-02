@@ -38,7 +38,7 @@ $(document).ready(function() {
 
         } else if (operator === "/") {
             storedNumber = storedNumber / parseFloat(currentNumber, 10);
-            
+
         } else if (operator === "*") {
             storedNumber = storedNumber * parseFloat(currentNumber, 10);
         }
@@ -85,4 +85,20 @@ $(document).ready(function() {
         storedNumber = 0;
     });
 
+    //   function to limit input number beginning with multiple zero's
+     $("#zero").click(function() {
+       var zero = '';
+       for (var i = 0; i < currentNumber.length; i++) {
+         if (currentNumber[i] === "0") {
+           zero++;
+         }
+       }
+       if (zero > 0) {
+         currentNumber = parseFloat(currentNumber, 10);
+         $("#display").text(currentNumber);
+       } else {
+         currentNumber += "0";
+         $("#display").text(currentNumber);
+       }
+     });
 });
