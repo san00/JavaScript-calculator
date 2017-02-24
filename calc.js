@@ -8,45 +8,76 @@ $(document).ready(function() {
     //operator will be set to any math operator clicked
     var operator = "";
 
+    var previousOperator;
+
     $("#display").text("0");
 
     //function to display numbers
-    $("#numbers a").not("#clear").click(function() {
+    $("#numbers a").not("#clear, #decimal" ).click(function() {
+
+        currentNumber += $(this).text();
+        $("#display").text(currentNumber);
         console.log("#numbers", {
             operator,
             storedNumber,
-            currentNumber
+            currentNumber,
+            previousOperator
         });
-        currentNumber += $(this).text();
-        $("#display").text(currentNumber);
     });
+
+     $("#decimal").click(function() {
+
+
+
+if( currentNumber.indexOf(".") === -1) {
+  console.log("#numbers", {
+      operator,
+      storedNumber,
+      currentNumber,
+      previousOperator
+  });
+       currentNumber += $(this).text();
+       $("#display").text(currentNumber);
+
+     }
+     })
 
     // function to allow use of arithmatic operators
     $("#operators a").not("#equals").click(function() {
+        operator = $(this).text();
 
+        if(previousOperator){
+
+        if (previousOperator === "+") {
+            storedNumber = storedNumber + parseFloat(currentNumber, 10);
+
+        } else if (previousOperator === "-") {
+            storedNumber = storedNumber - parseFloat(currentNumber, 10);
+
+        } else if (previousOperator === "/") {
+            storedNumber = storedNumber / parseFloat(currentNumber, 10);
+
+        } else if (previousOperator === "*") {
+            storedNumber = storedNumber * parseFloat(currentNumber, 10);
+        }
+
+        // addTogether = storedNumber + currentNumber;
         console.log("#operators", {
             operator,
             storedNumber,
-            currentNumber
+            currentNumber,
+            previousOperator
         });
-        operator = $(this).text();
-        if (operator === "+") {
-            storedNumber = storedNumber + parseFloat(currentNumber, 10);
+      }
+      else {
+          storedNumber = parseFloat(currentNumber, 10) ;
+      }
+      $("#display").text(operator);
+      //parse the string being added to storedNumber to convert to number
+        // storedNumber = parseFloat(currentNumber, 10) ;
+      currentNumber = "";
 
-        } else if (operator === "-") {
-            storedNumber = parseFloat(currentNumber, 10) - storedNumber;
-
-        } else if (operator === "/") {
-            storedNumber = storedNumber / parseFloat(currentNumber, 10);
-
-        } else if (operator === "*") {
-            storedNumber = storedNumber * parseFloat(currentNumber, 10);
-        }
-        //parse the string being added to storedNumber to convert to number
-        storedNumber = parseFloat(currentNumber, 10);
-        currentNumber = "";
-        $("#display").text("0");
-
+      previousOperator = operator;
     });
 
     //function to clear input
@@ -63,12 +94,7 @@ $(document).ready(function() {
 
     //function to output equals sum to display
     $("#equals").click(function() {
-        //console.log with an object allows all variables to be outputted if they are used(ES6). Not specific to console.log
-        console.log("#equals", {
-            operator,
-            storedNumber,
-            currentNumber
-        });
+
         if (operator === "+") {
             currentNumber = storedNumber + parseFloat(currentNumber, 10);
 
@@ -82,7 +108,16 @@ $(document).ready(function() {
             currentNumber = storedNumber * parseFloat(currentNumber, 10);
         }
         $("#display").text(currentNumber);
-        storedNumber = 0;
+        storedNumber = parseFloat(currentNumber, 10);
+
+        previousOperator = ""
+        //console.log with an object allows all variables to be outputted if they are used(ES6). Not specific to console.log
+        console.log("#equals", {
+            operator,
+            storedNumber,
+            currentNumber,
+            previousOperator
+        });
     });
 
     //   function to limit input number beginning with multiple zero's
