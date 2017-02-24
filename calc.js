@@ -13,7 +13,7 @@ $(document).ready(function() {
     $("#display").text("0");
 
     //function to display numbers
-    $("#numbers a").not("#clear" ).click(function() {
+    $("#numbers a").not("#clear,#decimal" ).click(function() {
 
         currentNumber += $(this).text();
         $("#display").text(currentNumber);
