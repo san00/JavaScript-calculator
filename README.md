@@ -11,4 +11,4 @@ The calculator can add, subtract, multiply and divide two numbers and keep chain
 
 # Technologies
  * JQuery
- * JavaScript
+
