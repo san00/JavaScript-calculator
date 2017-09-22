@@ -9,6 +9,10 @@ Build a calculator with the same functionality as the real world object. This ca
 # User story 
 The calculator can add, subtract, multiply and divide two numbers and keep chaining mathematical operations together until the equal button is pressed. When pressed, equal will show the correct total, which can be cleared via a button.
 
+Create an app functionally similar to this: https://codepen.io/FreeCodeCamp/full/rLJZrA/
+
 # Technologies
  * JQuery
+ * HTML/CSS
+ * Javascript
 
