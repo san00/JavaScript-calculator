@@ -13,7 +13,7 @@ $(document).ready(function() {
     $("#display").text("0");
 
     //function to display numbers
-    $("#numbers a").not("#clear,#decimal" ).click(function() {
+    $("#numbers a").not("#clear,#decimal").click(function() {
 
         currentNumber += $(this).text();
         $("#display").text(currentNumber);
@@ -25,59 +25,54 @@ $(document).ready(function() {
         });
     });
 
-     $("#decimal").click(function() {
-
-
-
-if( currentNumber.indexOf(".") === -1) {
-  console.log("#numbers", {
-      operator,
-      storedNumber,
-      currentNumber,
-      previousOperator
-  });
-       currentNumber += $(this).text();
-       $("#display").text(currentNumber);
-
-     }
-     })
+    $("#decimal").click(function() {
+        if (currentNumber.indexOf(".") === -1) {
+            console.log("#numbers", {
+                operator,
+                storedNumber,
+                currentNumber,
+                previousOperator
+            });
+            currentNumber += $(this).text();
+            $("#display").text(currentNumber);
+        }
+    })
 
     // function to allow use of arithmatic operators
     $("#operators a").not("#equals").click(function() {
         operator = $(this).text();
 
-        if(previousOperator){
+        if (previousOperator) {
 
-        if (previousOperator === "+") {
-            storedNumber = storedNumber + parseFloat(currentNumber, 10);
+            if (previousOperator === "+") {
+                storedNumber = storedNumber + parseFloat(currentNumber, 10);
 
-        } else if (previousOperator === "-") {
-            storedNumber = storedNumber - parseFloat(currentNumber, 10);
+            } else if (previousOperator === "-") {
+                storedNumber = storedNumber - parseFloat(currentNumber, 10);
 
-        } else if (previousOperator === "/") {
-            storedNumber = storedNumber / parseFloat(currentNumber, 10);
+            } else if (previousOperator === "/") {
+                storedNumber = storedNumber / parseFloat(currentNumber, 10);
 
-        } else if (previousOperator === "*") {
-            storedNumber = storedNumber * parseFloat(currentNumber, 10);
+            } else if (previousOperator === "*") {
+                storedNumber = storedNumber * parseFloat(currentNumber, 10);
+
+            }
+            console.log("#operators", {
+                operator,
+                storedNumber,
+                currentNumber,
+                previousOperator
+            });
+        } else {
+            storedNumber = parseFloat(currentNumber, 10);
+
         }
-
-        // addTogether = storedNumber + currentNumber;
-        console.log("#operators", {
-            operator,
-            storedNumber,
-            currentNumber,
-            previousOperator
-        });
-      }
-      else {
-          storedNumber = parseFloat(currentNumber, 10) ;
-      }
-      $("#display").text(operator);
-      //parse the string being added to storedNumber to convert to number
+        $("#display").text(operator);
+        //parse the string being added to storedNumber to convert to number
         // storedNumber = parseFloat(currentNumber, 10) ;
-      currentNumber = "";
+        currentNumber = "";
 
-      previousOperator = operator;
+        previousOperator = operator;
     });
 
     //function to clear input
@@ -94,7 +89,6 @@ if( currentNumber.indexOf(".") === -1) {
 
     //function to output equals sum to display
     $("#equals").click(function() {
-
         if (operator === "+") {
             currentNumber = storedNumber + parseFloat(currentNumber, 10);
 
@@ -107,10 +101,10 @@ if( currentNumber.indexOf(".") === -1) {
         } else if (operator === "*") {
             currentNumber = storedNumber * parseFloat(currentNumber, 10);
         }
-        $("#display").text(currentNumber);
-        storedNumber = parseFloat(currentNumber, 10);
 
+        storedNumber = parseFloat(currentNumber.toFixed(1), 10);
         previousOperator = ""
+          $("#display").text(currentNumber.toFixed(1));
         //console.log with an object allows all variables to be outputted if they are used(ES6). Not specific to console.log
         console.log("#equals", {
             operator,
@@ -121,19 +115,19 @@ if( currentNumber.indexOf(".") === -1) {
     });
 
     //   function to limit input number beginning with multiple zero's
-     $("#zero").click(function() {
-       var zero = '';
-       for (var i = 0; i < currentNumber.length; i++) {
-         if (currentNumber[i] === "0") {
-           zero++;
-         }
-       }
-       if (zero > 0) {
-         currentNumber = parseFloat(currentNumber, 10);
-         $("#display").text(currentNumber);
-       } else {
-         currentNumber += "0";
-         $("#display").text(currentNumber);
-       }
-     });
+    $("#zero").click(function() {
+        var zero = '';
+        for (var i = 0; i < currentNumber.length; i++) {
+            if (currentNumber[i] === "0") {
+                zero++;
+            }
+        }
+        if (zero > 0) {
+            currentNumber = parseFloat(currentNumber, 10);
+            $("#display").text(currentNumber);
+        } else {
+            currentNumber += "0";
+            $("#display").text(currentNumber);
+        }
+    });
 });
