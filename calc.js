@@ -137,3 +137,6 @@ if( currentNumber.indexOf(".") === -1) {
        }
      });
 });
+
+//please add some comments for better understanding
+
